@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+	<title>GiftHub: Event</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="css/gifthub.css" rel="stylesheet">
+	<!-- this is a comment in HTML -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->        
+</head>
+
+<body>
+	<div class = "navbar navbar-inverse navbar-fixed-top">
+	    <div class = "container">
+	            <a href = "/home" class = "navbar-brand">
+	            <img height="25" src="images/octocat-large-transparent.png">GiftHub
+	            </a>
+	           
+	            <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+	                    <span class = "icon-bar"></span>
+	                    <span class = "icon-bar"> </span>
+	                    <span class = "icon-bar"></span>
+	            </button>
+	           
+	            <div class = "collapse navbar-collapse navHeaderCollapse">  
+	            <ul class = "nav navbar-nav navbar-right">
+	           
+	                    <li><a href = "/home">Home</a></li>
+	   
+	                    <li><a href = "/createevent">Create Event</a></li>
+	                    <li><a href = "/eventcode">Event Code </a></li>
+	            </ul>
+	            </div>
+	    </div>
+    </div>
+    <br>
+	<div class="screen">
+		<h1 class="headerbox">{{title}}</h1>
+		<h5>{{date}}</h5>
+		<h7>{{description}}</h7>
+
+		<hr>
+		{{#each idea}}
+			<div class="idea" id="{{name}}">
+				<!--Leon's Changes
+				<div style="clear: both;">
+					<div id="div1">
+					<form action="/idea" method="get" id="{{name}}_form" class="form">
+						<input type="image" src="{{image}}" id="{{name}}_selected" type="submit" class="eventpageimage" value="{{eventid}}+{{name}}" name="selected"><h4>{{name}}</h4></input>
+					</form>
+					</div>
+					<div id="div2"><h1>
+							<button id="{{name}}_upvote" type="button" class="upvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="upvote" onClick="modifyVoteUp(this.id)"></button>
+							{{vote}}
+							<button id="{{name}}_downvote" type="button" class="downvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="downvote" onClick="modifyVoteDown(this.id)"></button>
+					</h1></div>
+				</div>-->
+				<!--Mari's Attempt to Merge-->
+				<div style="clear: both;">
+				<div id="div1">
+					<input type="image" src="{{image}}" id="{{compName}}_{{bought}}_idea_modal" type="submit" class="eventpageimage" value="{{eventid}}+{{name}}" name="selected" type data-toggle="modal" data-target="#{{compName}}_modal"><h5 class="ideaLabel">{{name}}</h5></input>
+				</div>
+				<div id="div2">
+						<h1>
+						<button id="{{name}}_upvote" type="button" class="upvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="upvote" onClick="modifyVoteUp(this.id)"></button>
+						<p class="vote">{{vote}}</p>
+						<button id="{{name}}_downvote" type="button" class="downvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="downvote" onClick="modifyVoteDown(this.id)"></button>
+						</h1>
+				</div>
+				<hr>
+				<!--
+				<img src="{{image}}" class="image" id="{{bought}}_{{name}}_image">
+				<br>
+				<h1>
+					<button id="{{name}}_upvote" type="submit" class="upvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="upvote" onclick="modifyVoteUp(this.id)"></button>
+					{{vote}}
+					<button id="{{name}}_downvote" type="submit" class="downvoteButton" value="{{eventid}}+{{name}}+{{vote}}" name="downvote" onclick="modifyVoteDown(this.id)"></button>
+					</form>
+				</h1>
+				<br>
+				<button id="{{compName}}_idea_modal" class="submitButton" type data-toggle="modal" data-target="#{{compName}}_modal">{{name}}</button>
+				-->
+				<div class="modal fade" id="{{compName}}_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  			<div class="modal-dialog">
+		    			<div class="modal-content">
+		      				<div class="modal-header">
+		        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        				<h4 class="modal-title" id="myModalLabel"><b>{{name}}</b></h4>
+		      				</div>
+		      				<div class="modal-body">
+		      					<div class="idea">
+									<img src="{{image}}" class="image">
+									<h3>{{price}}</h3>
+									<p><center>{{description}}</center></p>
+									<button type="submit" class="submitButton" id="{{name}}_bought" name="bought" onclick="claimClicked(this.id, '{{bought}}_{{name}}_image', '{{compName}}_{{bought}}_idea_modal', '{{compName}}_modal')">claim</button>
+								</div>
+							</div>
+		      				<div class="modal-footer">
+		      					<button type="button" class="cancelButton" value="{{eventid}}" id="eventcode" name="eventcode" data-dismiss= "modal">close</button>
+      		  				</div>
+    					</div>
+  		  			</div>
+				</div>
+				<div class="modal fade" id="{{compName}}_bought_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  			<div class="modal-dialog">
+		    			<div class="modal-content">
+		      				<div class="modal-header">
+		        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        				<h4 class="modal-title" id="myModalLabel"><b>{{name}}</b></h4>
+		      				</div>
+		      				<div class="modal-body">
+		      					<div class="idea">
+									<img src="{{image}}" class="image">
+									<h3>{{price}}</h3>
+									<p><center>{{description}}</center></p>
+									<button type="submit" class="ideaBoughtButton" id="{{name}}_bought" name="bought" disabled="true">claimed</button>
+								</div>
+							</div>
+		      				<div class="modal-footer">
+		      					<button type="button" class="cancelButton" value="{{eventid}}" id="eventcode" name="eventcode" data-dismiss= "modal">close</button>
+      		  				</div>
+    					</div>
+  		  			</div>
+				</div>
+			</div>
+			</div>
+			<!-- <hr> -->
+		{{/each}}
+
+
+		<br>
+		<button class="submitButton" type data-toggle="modal" data-target="#myModal">Submit idea</button>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel"><b>submit a gift idea</b></h4>
+		      </div>
+		      <div class="modal-body">
+		        <form id="submitIdeaForm" action="/eventpage" method="get">
+					<input id="name" name="name" class="input-lg" type="text" placeholder="Name" required>
+					<input id="description" name="description" class="input-lg" type="text" placeholder="Description" required>
+					<input id="image" name="image" class="input-lg" type="text" placeholder="Image URL">
+					<div class="dropdown">
+				    	<select name="price" class="dropdown" id="price" name="price">
+				        	<option value=""><center>select price</center></option>
+				        	<option value="$"><center>$</center></option>
+				        	<option value="$$"><center>$$</center></option>
+				        	<option value="$$$"><center>$$$</center></option>
+				        	<option value="$$$$"><center>$$$$</center></option>
+				    	</select>
+					    </div>
+			      </div>
+			      <input id="changes" name="changes" type="hidden" value=""></input>
+		      	<div class="modal-footer">
+		      			 <button type="button" class="cancelButton" value="{{eventid}}"" id="eventcode" name="eventcode" data-dismiss= "modal"" >Cancel</button>
+		      	         <button type="submit" class="submitButton" id="eventcode" value="{{eventid}}" name="eventcode">Submit</button>
+	    		</form>
+
+      		  </div>
+    		</div>
+  		  </div>
+		</div>
+	</div>
+	<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src = "/js/bootstrap.js"></script>	
+	<script src = "/js/eventPage.js"></script>
+</body>
+</html>
