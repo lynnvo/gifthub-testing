@@ -51,13 +51,14 @@
 			<input id="description" name="description" class="input-lg" type="text" placeholder="Description" required>
 			<input id="image" name="image" class="input-lg" type="text" placeholder="Image URL">
 			<div class="dropdown">
-		    	<select name="price" class="dropdown" id="price" name="price">
-		        	<option value=""><center>select price</center></option>
-		        	<option value="$"><center>$</center></option>
-		        	<option value="$$"><center>$$</center></option>
-		        	<option value="$$$"><center>$$$</center></option>
-		        	<option value="$$$$"><center>$$$$</center></option>
-		    	</select>
+						<select name="price" class="dropdown" id="price" name="price">
+				        	<option value=""><center>select price</center></option>
+				        	<option value="$0 - $10"><center>$0 - $10</center></option>
+				        	<option value="$11 - $25"><center>$11 - $25</center></option>
+				        	<option value="$26 - $50"><center>$26 - $50</center></option>
+				        	<option value="$51 - $100"><center>$51 - $100</center></option>
+				        	<option value="$100+"><center>$100+</center></option>
+				    	</select>
 		    </div>
 			<button type="submit" class="submitButton" id="eventcode" value="{{eventid}}" name="eventcode">Submit</button>
 		</form> 	
